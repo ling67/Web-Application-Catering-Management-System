@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menu Management</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <style>
+        h3{
+            text-align: center;
+            padding: 40px 0px;
+        }
+        td img{
+            width: 80px;
+            height: 80px;
+        }
+        tbody tr:nth-child(2n+1){
+            background-color: #fefefe;
+        }
+        tbody tr:nth-child(2n){
+            background-color: #f3f3f3;
+        }
+        body{
+            background-image: url('../images/bg4.jpg');
+            height: 100vh;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .tab{
+            background-color: #67a9a9 !important;
+        }
+    </style>
+
+    <script>
+        menus = []
+        var id= -1  //global val check if add or edit
+
+        $().ready(function () {
+            $.ajax({
+                url: "/menu",
+                async: false,
+                type: 'GET',
+                contentType: 'application/json',
+                data: {},
+                success: function (data, status) {
+                    menus = data;
+
+                    let $tbody = $('#menu-table > tbody');
+                    $tbody.html('');
+
+                    menus.forEach(menu => {
+                        let rowHtml = '<tr>'
+                            + '<td>' + menu.menuName + '</td>'
+                            + '<td>' + menu.menuType + '</td>'
+                            + '<td>' + menu.price + '</td>'
+                            + '<td>' + menu.menuImage + '</td>'
+                            + '<td>' + menu.description + '</td>'
+                            + '<td>' + menu.status + '</td>'
+                            + `<td><button onclick="edit(`+menu.id+`)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Edit</button></td>`
+                            + `<td><button onclick="deletemenu(`+menu.id+`)" type="button" class="btn btn-danger">Delete</button></td>`
+                            + '</tr>'
+                        $tbody.append(rowHtml);
+                    })
+                }
+            }); 
+
+            //add menu
+            $('#add').click((e) => {
+                let menu = {};
+                menu.menuName = $('#menuName').val();
+                menu.menuType = $('#menuType').val();
+                menu.price = $('#menuPrice').val();
+                menu.description = $('#description').val();
+                menu.status = $('#status').val();
+
+                if(id  == -1){
+                    $.ajax({
+                        url: "/menu",
+                        type: 'POST',
+                        data: JSON.stringify(menu),
+                        contentType: 'application/json',
+                        success: function (data, status) {
+                            alert('message:' + data.message + ', status = ' + status);
+                            location.reload();
+                        }
+                    });
+                }else{
+                    menu.id = id;
+                    $.ajax({
+                        url: "/menu",
+                        type: 'PUT',
+                        data: JSON.stringify(menu),
+                        contentType: 'application/json',
+                        success: function (data, status) {
+                            alert('message:' + data.message + ', status = ' + status);
+                            location.reload();
+                            id = -1;
+                        }
+                    });
+                }
+            });
+            
+        });
+
+	    function edit(menuId){
+            menus.forEach((m) => {
+                if (m.id == menuId){
+                    $('#menuName').val(m.menuName);
+                    $('#menuType').val(m.menuType);
+                    $('#menuPrice').val(m.price);
+                    $('#description').val(m.description);
+                    $('#status').val(m.status);
+                    id = menuId;
+                }
+            });
+		}
+
+        //delete menu
+        function deletemenu(menuId){
+            $.ajax({
+                url: '/menu',
+                type: 'DELETE',
+                data: {"menuId": menuId},
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (data, status) {
+                    alert('message:' + data.message + ', status = ' + status);
+                    location.reload();
+                }
+            });
+        };
+
+        //edit menu
+        function editmenu(menuId){
+            id =  menuId
+        };
+
+
+    </script>
+
+</head>
+<body>
+    <nav class=" tab navbar navbar-expand-lg navbar-light bg-light">
+        <a style="color:#fff"  class="navbar-brand" href="./bHome.html">Home Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a style="color: #3d74cc;" class="nav-link" href="./bMenu.html">Menu Management</a>
+            </li>
+            <li class="nav-item">
+              <a style="color:#fff" class="nav-link active" href="./bUserManage.html">User Management</a>
+            </li>
+            <li class="nav-item">
+              <a style="color:#fff" class="nav-link" href="./bpendingOrder.html">Pending Order</a>
+            </li>
+            <li class="nav-item">
+              <a style="color:#fff" class="nav-link "href="./bOrder.html">History Order</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container">
+        <h3>Menu Management</h3>
+        <table style=" width: 80%;margin: 0 auto;" id="menu-table" class="table table-hover table-bordered">
+            <thead style=" background: #67a9a9;color:#fff">
+                <tr>
+                    <th>Menu Name</th>
+                    <th>Menu Type</th>
+                    <th>Menu Price</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <td>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                    </td>
+            </tbody>
+        </table>
+
+        <div style="text-align:center">
+            <br/>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #67a9a9;"> Add</button>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="menuName" class="form-label">Menu Name</label>
+                                <input type="text" class="form-control" id="menuName" name="menuName" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuType" class="form-label">Menu Type</label>
+                                <input type="text" class="form-control" id="menuType" name="menuType">
+                            </div>
+                            <div class="mb-3">
+                                <label for="menuPrice" class="form-label">Menu Price</label>
+                                <input type="text" class="form-control" id="menuPrice" name="menuPrice">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="description" name="description">
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label">status</label>
+                                <input type="text" class="form-control" id="status" name="status">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <label for="Image" class="form-label">Image</label>
+                                <input type="file" class="form-control" id="Image" name="Image">
+                                </div> -->
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-primary" id = "add" data-bs-target="#exampleModal" value="Confirm" />
+                        <input type="button" class="btn btn-secondary" data-bs-dismiss="modal" value="Close" />
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+
+</html>

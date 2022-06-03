@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <style>
+        body{
+            background-image: url('../images/user4.jpg');
+            height: 100vh;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        h1{
+            text-align: center;
+            padding: 40px 0px;
+        }
+        .nav{
+            display: flex;
+            padding: 0px 200px;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav a{
+            width: 300px;
+            height: 150px;
+            background-color: #67a9a9;
+            border-radius: 25px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+            margin-left: 80px;
+            margin-top: 50px;
+            text-align: center;
+            line-height: 150px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #f6fbfb;
+            font-size: xx-large;
+            font-family:"Microsoft YaHei"
+        }
+        /* .nav{
+            display: flex;
+            width: 200px;
+            height: 300px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #0f8080;
+            margin-left: 300px;
+            margin-top: 300px;
+        } */
+        /* .nav a{
+           width: 160px;
+           height: 50px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: #DAA51F;
+            margin-top: 15px;
+            position: relative;
+        } */
+        /* .nav a span{
+           width: 300px;
+           height: 200px;
+           box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+           margin-left: 80px;
+            margin-top: 50px;
+            text-align: center;
+            line-height: 200px;
+            cursor: pointer;
+            text-decoration: none;
+        } */
+
+        .tab{
+            background-color: #67a9a9 !important;
+        }
+    </style>
+    <script>
+        $().ready(function () {
+          if (localStorage.hasOwnProperty("username")) {
+            username = localStorage.getItem("username")
+            console.log(username)
+          }
+        })
+
+    </script>
+</head>
+<body>
+    <div class="app">
+        <nav class=" tab navbar navbar-expand-lg navbar-light bg-light">
+            <a style="color:#102d31"  class="navbar-brand" href="./userHome.html">Home Page</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a style="color: #fff;" class="nav-link" href="./userEdit.html">Edit Information</a>
+                </li>
+                <li class="nav-item active">
+                  <a style="color:#fff" class="nav-link active" href="./userPlaceOrder.html">Ordering</a>
+                </li>
+                <li class="nav-item">
+                  <a style="color:#fff" class="nav-link" href="./userOrders.html">View All Order</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <h1 style="font-family: Microsoft YaHei">Welcome To Our Restaurant</h1>
+        <div class="nav">
+            <a href="./userEdit.html">Edit Information</a>
+            <a href="./userPlaceOrder.html">Ordering</a>
+            <a href="./userOrders.html">View All Order</a>
+            <!-- <button type="button" class="btn btn-primary btn-rounded" href="./userEdit.html">Edit Information</button>
+            <button type="button" class="btn btn-secondary btn-rounded" href="./userPlaceOrder.html">Ordering</button>
+            <button type="button" class="btn btn-success btn-rounded" href="./userOrders.html">View All Order</button> -->
+        </div>
+    </div>
+</body>
+</html>

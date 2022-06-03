@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Details</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <style>
+        h3{
+            text-align: center;
+            padding: 40px 0px;
+        }
+        .app{
+            padding-bottom: 40px;
+        }
+    </style>
+    <script>
+        var menu;
+        $(document).ready(function() {
+            menuId = getParameterByName(menuId)
+            $.ajax({
+                url: "/menu" + menuId,
+                async: false,
+                type: 'GET',
+                contentType: 'application/json',
+                data: {},
+                success: function (data, status) {
+                    menu = data;
+                }
+            })
+        });
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+    </script>
+</head>
+<body>
+    <div class="app">
+        <h3>Menu Detail Information</h3>
+        <div class="card" style="width: 60%;margin:0 auto">
+            <img src="{menu.menuImage}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <script type="text/javascript">document.write(menu.menuName)</script>
+                </h5>
+                <p class="card-text">Price :<script type="text/javascript">document.write(menu.price)</script></p>
+                <p class="card-text">Description: <script type="text/javascript">document.write(menu.description)</script></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

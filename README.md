@@ -8,10 +8,10 @@ The order management system (OMS) aims to help increasing efficiency by managing
 
 The order management system including two kinds of user: customer, manager. Different user has different privilege in order management system.  
 Customer:
-![image](https://user-images.githubusercontent.com/93315926/171946079-2c06a410-bdf2-4cb0-be47-2bb6468d68fd.png)
+![image](https://github.com/ling67/catering_management_system/blob/main/image/customer_usercase.png)
 
 Business: 
-![image](https://user-images.githubusercontent.com/93315926/171946079-2c06a410-bdf2-4cb0-be47-2bb6468d68fd.png)
+![image](https://github.com/ling67/catering_management_system/blob/main/image/business_usercase.png)
 
 ### [3.Which Spring package are you going to use?]()
 JDBC API for Spring (week 6 and 7) or Spring Data JPA (Week 9)

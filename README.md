@@ -7,21 +7,25 @@ The order management system (OMS) aims to help increasing efficiency by managing
 ### [2.A bulleted list of descriptive usage cases.]()
 
 The order management system including two kinds of user: customer, manager. Different user has different privilege in order management system.  
-Customer:
-![image](https://github.com/ling67/catering_management_system/blob/main/image/customer_usercase.png)
 
-Business: 
-![image](https://github.com/ling67/catering_management_system/blob/main/image/business_usercase.png)
+* Customer:
+
+<img src="https://github.com/ling67/catering_management_system/blob/main/image/customer_usercase.png" width="600px">
+
+* Business: 
+<img src="https://github.com/ling67/catering_management_system/blob/main/image/business_usercase.png" width="600px">
 
 ### [3.Which Spring package are you going to use?]()
 JDBC API for Spring (week 6 and 7) or Spring Data JPA (Week 9)
-JDBC API for Spring
+* JDBC API for Spring
     
 ### [4.Front-end JavaScript library (jQuery, Angular, ReactJS)]()
-jQuery
+* jQuery
 
 ### [5.CSS Framework (e.g. Bootstrap)]()
-Bootstrap
+* Bootstrap
   
-[Introduction](https://github.com/ling67/catering_management_system/blob/main/Catering%20Management.pdf)
+### [6.Design]()
+
+[Detail Design Presentation](https://github.com/ling67/catering_management_system/blob/main/Catering%20Management.pdf)
 
